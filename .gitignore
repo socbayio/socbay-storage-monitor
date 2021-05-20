@@ -102,3 +102,10 @@ dist
 
 # TernJS port file
 .tern-port
+
+config.js
+ipfsconfig.js
+logs/crustSocbayPinnerLog.txt
+logs/debug.txt
+logs/error.txt
+logs/info.txt
