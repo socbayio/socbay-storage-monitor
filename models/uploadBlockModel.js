@@ -38,6 +38,10 @@ const uploadBlockSchema = new Schema({
         type: Boolean,
         default: false,
     },
+    removedFromLocalIpfs: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 
