@@ -42,13 +42,14 @@ module.exports = async (req, res, next) => {
                     replicas: statusObj[0].reported_replica_count,
                 }
                 if (!uploadBlockFound[blockCount].removedFromLocalIpfs){
+                    for (let fileCount = 0; fileCount < uploadBlockFound[blockCount].filesInfo.length; fileCount++) {
+                        console.log(uploadBlockFound[blockCount].filesInfo[fileCount].CID);
+                        await removeIfExist(ipfs, uploadBlockFound[blockCount].filesInfo[fileCount].CID);
+                    }
                     const rmStatus = await removeIfExist(ipfs, uploadBlockFound[blockCount].CID);
                     if (rmStatus) {
                         objToUpload.removedFromLocalIpfs = true;
                     }
-                }
-                for (let fileCount = 0; fileCount < uploadBlockFound[blockCount].filesInfo.length; fileCount++) {
-                    await removeIfExist(ipfs, uploadBlockFound[blockCount].filesInfo[fileCount].CID)
                 }
             }
             uploadBlock.findByIdAndUpdate(uploadBlockFound[blockCount]._id, objToUpload)
